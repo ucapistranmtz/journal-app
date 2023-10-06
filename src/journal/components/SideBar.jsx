@@ -27,7 +27,7 @@ export const SideBar = ({ drawerWith = 240 }) => {
 
             <List>
                 {
-                    ['Januarny', 'February', 'March', 'April', 'May'].map(text => (
+                    ['January', 'February', 'March', 'April', 'May'].map(text => (
                         <ListItem key={text} disablePadding>
                             <ListItemButton>
                                 <ListItemIcon>
