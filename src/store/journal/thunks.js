@@ -1,7 +1,7 @@
 import { collection, deleteDoc, doc, setDoc } from 'firebase/firestore/lite';
-import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setSaving, updateNote } from './journalSlice'
+import { addNewEmptyNote, savingNewNote, setActiveNote, setNotes, setPhotosToActiveNote, setSaving, updateNote } from './journalSlice'
 
-import { loadNotes } from '../../helpers'
+import { fileUpload, loadNotes } from '../../helpers'
 
 import { FirebaseDB } from '../../firebase/config'
 import { updateCurrentUser } from 'firebase/auth';
@@ -54,14 +54,33 @@ export const startSaveNote = () => {
 
         dispatch(setSaving());
         const { uid } = getState().auth;
-        const { active:note } = getState().journal;
-        
-        const noteToFireStore = {...note};
+        const { active: note } = getState().journal;
+
+        const noteToFireStore = { ...note };
         delete noteToFireStore.id;
-         const docRef = doc(FirebaseDB,`${uid}/journal/notes/${note.id}`);
-         await setDoc(docRef, noteToFireStore,{merge:true});
+        const docRef = doc(FirebaseDB, `${uid}/journal/notes/${note.id}`);
+        await setDoc(docRef, noteToFireStore, { merge: true });
 
         dispatch(updateNote(note));
+
+    }
+}
+
+export const startUploadingFiles = (files = []) => {
+
+    return async (dispatch) => {
+        dispatch(setSaving());
+
+        const fileUploadPromises = []
+        for (let index = 0; index < files.length; index++) {
+            const file = files[index];
+            fileUploadPromises.push(fileUpload(file));
+        }
+
+        const photosUrls = await Promise.all(fileUploadPromises);
+        dispatch(setPhotosToActiveNote(photosUrls))
+       // console.log(photosUrls);
+
 
     }
 }
