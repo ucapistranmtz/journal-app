@@ -44,7 +44,8 @@ export const startLoadingNotes = () => {
         const { uid } = getState().auth;
         if (!uid) throw new Error('El UID del usuario no existe');
 
-        const notes = await loadNotes(uid);
+        let notes = await loadNotes(uid);
+        notes.sort((a,b)=> new Date(b.date) - new Date(a.date))
         dispatch(setNotes(notes));
     }
 }
