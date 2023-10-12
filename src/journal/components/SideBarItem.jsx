@@ -7,10 +7,7 @@ import { setActiveNote } from '../../store/journal';
 
 export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
       
-
-
-
-  
+ 
     const dispatch = useDispatch();
 
     const onClickNote = () => {
@@ -24,6 +21,16 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
             : title;
     },[ title ])
 
+    const dateString = useMemo(() => {
+        const newDate = new Date(date);
+        return new Intl.DateTimeFormat('en-US').format(date)
+    }, [date])
+
+    const dateTime = useMemo(() => {
+        const newDate = new Date(date);
+        return newDate.toLocaleTimeString()  
+    }, [date])
+
   return (
     <ListItem disablePadding>
         <ListItemButton onClick={ onClickNote }>
@@ -31,8 +38,9 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
                 <TurnedInNot />
             </ListItemIcon>
             <Grid container>
-                <ListItemText primary={ newTitle } />
-                <ListItemText secondary={ body } />
+                <ListItemText primary={ dateString }   />
+                <ListItemText secondary={ dateTime }   />
+               
             </Grid>
         </ListItemButton>
     </ListItem>

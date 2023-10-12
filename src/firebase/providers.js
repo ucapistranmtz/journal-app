@@ -4,26 +4,26 @@ import { FirebaseAuth } from './config';
 
 const googleProvider = new GoogleAuthProvider();
 
-export const singInWithGoogle = async() => {
+export const singInWithGoogle = async () => {
 
     try {
-        
-        const result = await signInWithPopup(FirebaseAuth, googleProvider );
+
+        const result = await signInWithPopup(FirebaseAuth, googleProvider);
         // const credentials = GoogleAuthProvider.credentialFromResult( result );
         const { displayName, email, photoURL, uid } = result.user;
-        
+
         return {
             ok: true,
             // User info
             displayName, email, photoURL, uid
         }
-        
+
 
     } catch (error) {
-        
+
         const errorCode = error.code;
         const errorMessage = error.message;
-    
+
         return {
             ok: false,
             errorMessage,
@@ -33,13 +33,13 @@ export const singInWithGoogle = async() => {
 }
 
 
-export const registerUserWithEmailPassword = async({ email, password, displayName }) => {
+export const registerUserWithEmailPassword = async ({ email, password, displayName }) => {
 
     try {
-        const resp = await createUserWithEmailAndPassword( FirebaseAuth, email, password );
+        const resp = await createUserWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL } = resp.user;
 
-        await updateProfile( FirebaseAuth.currentUser, { displayName });
+        await updateProfile(FirebaseAuth.currentUser, { displayName });
 
         return {
             ok: true,
@@ -54,10 +54,10 @@ export const registerUserWithEmailPassword = async({ email, password, displayNam
 }
 
 
-export const loginWithEmailPassword = async({ email, password }) => {
+export const loginWithEmailPassword = async ({ email, password }) => {
 
     try {
-        const resp = await signInWithEmailAndPassword( FirebaseAuth, email, password );
+        const resp = await signInWithEmailAndPassword(FirebaseAuth, email, password);
         const { uid, photoURL, displayName } = resp.user;
 
         return {
@@ -70,7 +70,7 @@ export const loginWithEmailPassword = async({ email, password }) => {
     }
 }
 
-export const logoutFirebase = async() => {
+export const logoutFirebase = async () => {
     return await FirebaseAuth.signOut();
 }
 

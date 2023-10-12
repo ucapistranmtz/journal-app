@@ -15,7 +15,7 @@ const firebaseConfig = {
     storageBucket: "journal-app-de006.appspot.com",
     messagingSenderId: "243961884841",
     appId: "1:243961884841:web:a7a2f97bfd1fe2586cf9b8"
-};
+  };
 
 // Initialize Firebase
 export const FirebaseApp = initializeApp(firebaseConfig);

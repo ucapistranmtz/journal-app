@@ -8,7 +8,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 import { useForm } from '../../hooks/useForm';
 import { ImageGallery } from '../components'
-import { setActiveNote, startSaveNote, startUploadingFiles, startDeletingNote} from '../../store/journal';
+import { setActiveNote, startSaveNote, startUploadingFiles, startDeletingNote } from '../../store/journal';
 
 
 export const NoteView = () => {
@@ -31,7 +31,7 @@ export const NoteView = () => {
 
     useEffect(() => {
         if (messageSaved.length > 0) {
-              Swal.fire('Nota updated', messageSaved, 'success');
+            Swal.fire('Nota updated', messageSaved, 'success');
         }
     }, [messageSaved])
 
@@ -60,8 +60,8 @@ export const NoteView = () => {
             sx={{ mb: 1 }}
             className='animate__animated animate__fadeIn animate__faster'
         >
-            <Grid item>
-                <Typography fontSize={39} fontWeight='light' >{dateString}</Typography>
+            <Grid item  >
+                <Typography fontSize={20} fontWeight='light' >{dateString}</Typography>
             </Grid>
             <Grid item>
 
@@ -88,21 +88,22 @@ export const NoteView = () => {
                     sx={{ padding: 2 }}
                 >
                     <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
-                    Guardar
+                    Save
                 </Button>
             </Grid>
 
-            <Grid container>
+            <Grid container >
                 <TextField
                     type="text"
                     variant="filled"
                     fullWidth
-                    placeholder="Ingrese un título"
-                    label="Título"
+                    placeholder="Title"
+                    label="title"
                     sx={{ border: 'none', mb: 1 }}
                     name="title"
                     value={title}
                     onChange={onInputChange}
+
                 />
 
                 <TextField
@@ -110,7 +111,7 @@ export const NoteView = () => {
                     variant="filled"
                     fullWidth
                     multiline
-                    placeholder="¿Qué sucedió en el día de hoy?"
+                    placeholder="What's going on today?"
                     minRows={5}
                     name="body"
                     value={body}
@@ -125,7 +126,7 @@ export const NoteView = () => {
                     color="error"
                 >
                     <DeleteOutline />
-                    Borrar
+                    Delete
                 </Button>
             </Grid>
 

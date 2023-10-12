@@ -4,7 +4,7 @@ import { LogoutOutlined, MenuOutlined } from '@mui/icons-material';
 import { startLogout } from '../../store/auth';
 
 
-export const NavBar = ({ drawerWidth = 240 }) => {
+export const NavBar = ({ drawerWidth = 150 }) => {
 
     const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ export const NavBar = ({ drawerWidth = 240 }) => {
     <AppBar 
         position='fixed'
         sx={{ 
-            width: { sm: `calc(100% - ${ drawerWidth }px)` },
+            width: { xs: `calc(100% - ${ 50 }px)` },
             ml: { sm: `${ drawerWidth }px` }
          }}
     >

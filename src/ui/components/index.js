@@ -1,1 +1,1 @@
-export * from './heckingAuth'
+export * from './CheckingAuth'
